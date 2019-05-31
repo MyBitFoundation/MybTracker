@@ -26,7 +26,7 @@ jobs:
             npm install
             cd ..
             tsc
-            cdk bootstrap 769646369861/eu-central-1
+            cdk bootstrap 769646369861/us-east-1
             cdk deploy --ci --require-approval never | cat
 
       - save_cache:
