@@ -133,7 +133,7 @@ exports.handler = async () => {
       provider
     );
     const eventsContract = new ethers.Contract(
-      "0x3388729Ea21775D5f3a712853338D7Aba04d5CE5",
+      "0xF7851BDa500a48fA7c213FE3B0de8602e5CD6B6f",
       eventsABI,
       provider
     );
