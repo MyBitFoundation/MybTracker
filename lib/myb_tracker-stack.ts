@@ -5,13 +5,12 @@ import events = require("@aws-cdk/aws-events");
 import iam = require("@aws-cdk/aws-iam");
 import ec2 = require("@aws-cdk/aws-ec2");
 import rds =require("@aws-cdk/aws-rds");
-import cryptoRandomString from "crypto-random-string";
 import { SecretValue } from "@aws-cdk/cdk";
 export class MybTrackerStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const pass = cryptoRandomString({ length: 16, type: "url-safe" });
+    const pass = process.env.DB_PASS
 
     const role = new iam.Role(this, "LambdaExecutionRole", {
       assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com")
@@ -35,7 +34,7 @@ export class MybTrackerStack extends cdk.Stack {
       engine: rds.DatabaseClusterEngine.Aurora,
       instances: 1,
       instanceProps: {
-        instanceType: new ec2.InstanceType('t2.small'),
+        instanceType: new ec2.InstanceType('t3.small'),
         vpc: vpc,
         vpcSubnets: {
           subnetType: ec2.SubnetType.Public
